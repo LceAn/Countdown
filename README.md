@@ -9,5 +9,5 @@
 
 # 修改
 
-改index中的时间，即可开启倒计时
-
+改index中的时间，即可开启对应时间倒计时
+<img width="975" alt="image" src="https://github.com/LceAn/Countdown/assets/63484787/05c52d7d-0f31-4978-8267-1529f2d4c58d">

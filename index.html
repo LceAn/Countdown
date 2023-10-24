@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时页面</title>
+    <style>
+        body {
+            margin: 0;
+        <!-- 设置外边距为0 --> height: 100vh;
+        <!-- 设置高度为视口高度的100 % --> background: url(#);
+        <!-- 设置背景图像为123 . jpg --> background-size: contain;
+        <!-- 设置背景图像大小为包含在容器内 --> background-repeat: no-repeat;
+        <!-- 设置背景图像不重复显示 --> background-position: center;
+        <!-- 设置背景图像在容器中居中显示 --> display: flex;
+        <!-- 设置元素为弹性布局 --> justify-content: flex-end;
+        <!-- 在主轴上将内容靠右对齐 --> align-items: flex-end;
+        <!-- 在交叉轴上将内容靠底部对齐 -->
+        }
+
+        #countdown {
+            font-size: 18vw;
+        <!-- 设置字体大小为视口宽度的18 % --> font-weight: bold;
+        <!-- 设置字体为粗体 --> color: #ffffff;
+        <!-- 设置文字颜色为白色 --> text-align: center;
+        <!-- 文本居中对齐 --> padding: 175px;
+        <!-- 设置内边距为175像素 --> margin-bottom: 25px;
+        <!-- 设置下外边距为25像素 --> position: absolute;
+        <!-- 设置定位为绝对定位 --> bottom: 0;
+        <!-- 设置底部距离为0 --> right: 7.5%;
+        <!-- 设置右侧距离为视口宽度的7 .5 % -->
+        }
+    </style>
+</head>
+<body>
+<div id="countdown">00:00:00</div> <!-- 创建一个具有id为countdown的<div>元素并显示倒计时 -->
+
+<script>
+    function updateCountdown() { <!-- 定义名为updateCountdown的JavaScript函数 -->
+        const now = new Date().getTime(); <!-- 获取当前时间的时间戳 -->
+        const eventTime = new Date("2023-12-31T21:00:00").getTime(); // 设置活动结束时间
+
+        const timeDifference = eventTime - now; <!-- 计算活动结束时间和当前时间的时间差 -->
+
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); <!-- 计算小时部分 -->
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)); <!-- 计算分钟部分 -->
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000); <!-- 计算秒部分 -->
+
+        const countdownElement = document.getElementById("countdown"); <!-- 获取id为countdown的元素 -->
+
+        if (timeDifference <= 0) { <!-- 如果时间差小于等于0 -->
+            countdownElement.textContent = ""; <!-- 清空倒计时元素的文本内容 -->
+        } else {
+            countdownElement.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`; <!-- 更新倒计时元素的文本内容 -->
+        }
+    }
+
+    function formatTime(time) { <!-- 定义名为formatTime的JavaScript函数，用于格式化时间部分 -->
+        return time < 10 ? `0${time}` : time; <!-- 如果时间小于10，在前面添加0，否则保持不变 -->
+    }
+
+    updateCountdown(); // 初始化，调用updateCountdown函数
+    setInterval(updateCountdown, 1000); // 每秒更新一次倒计时，设置定时器每1000毫秒调用一次updateCountdown函数
+</script>
+</body>
+</html>

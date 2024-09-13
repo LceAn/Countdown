@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>倒计时页面</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  #countdown {
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+  
+  #message {
+    margin-top: 20px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div id="countdown">00:00:00</div>
+<div id="message"></div>
+
+<script>
+// 配置对象
+const config = {
+  eventTime: "2024-10-23T21:00:00", // 活动结束时间
+  backgroundImage: 'hw.jpg', // 背景图片路径
+  fontSize: '18vw', // 字体大小
+  messageAfterCountdown: "活动已经开始！" // 倒计时结束后的消息
+};
+
+// 设置页面样式和内容
+document.body.style.background = `url('${config.backgroundImage}') no-repeat center center fixed`;
+document.body.style.backgroundSize = 'cover';
+document.getElementById('countdown').style.fontSize = config.fontSize;
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const eventTime = new Date(config.eventTime).getTime(); // 使用配置中的活动结束时间
+  const timeDifference = eventTime - now;
+
+  const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+  const countdownElement = document.getElementById("countdown");
+  const messageElement = document.getElementById("message");
+
+  if (timeDifference <= 0) {
+    countdownElement.textContent = "00:00:00";
+    messageElement.textContent = config.messageAfterCountdown; // 使用配置中的结束消息
+    clearInterval(interval);
+  } else {
+    countdownElement.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+  }
+}
+
+function formatTime(time) {
+  return time < 10 ? `0${time}` : time;
+}
+
+updateCountdown(); // 初始化
+const interval = setInterval(updateCountdown, 1000); // 每秒更新一次倒计时
+</script>
+</body>
+</html>

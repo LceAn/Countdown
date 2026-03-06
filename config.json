@@ -1,0 +1,13 @@
+{
+  "title": "2026 新年倒计时",
+  "targetDate": "2026-01-01T00:00:00",
+  "message": "距离 2026 年还有",
+  "completedMessage": "🎉 2026 年已经到来！",
+  "theme": "gradient",
+  "showSeconds": true,
+  "showProgress": true,
+  "yearProgress": {
+    "startDate": "2025-01-01T00:00:00",
+    "endDate": "2026-01-01T00:00:00"
+  }
+}

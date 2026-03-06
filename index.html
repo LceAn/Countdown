@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时 - Countdown</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="title">加载中...</h1>
+            <p id="subtitle" class="subtitle">倒计时进行中</p>
+        </header>
+
+        <main class="main-content">
+            <div class="countdown-wrapper">
+                <div class="countdown">
+                    <div class="time-unit">
+                        <span id="days" class="number">00</span>
+                        <span class="label">天</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="hours" class="number">00</span>
+                        <span class="label">小时</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="minutes" class="number">00</span>
+                        <span class="label">分钟</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="seconds" class="number">00</span>
+                        <span class="label">秒</span>
+                    </div>
+                </div>
+
+                <div id="progress-container" class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <span id="progress-percent" class="progress-percent">0%</span>
+                </div>
+
+                <div id="message" class="message"></div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Made with ❤️ by LceAn</p>
+            <div class="theme-toggle">
+                <button id="theme-btn" class="theme-btn" title="切换主题">🌙</button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/countdown.js"></script>
+</body>
+</html>

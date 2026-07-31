@@ -70,11 +70,10 @@ class Countdown {
     }
 
     update() {
-        const now = new Date().getTime();
-        const target = new Date(this.config.targetDate).getTime();
-        const difference = target - now;
+        const now = new Date();
+        const remaining = CountdownTime.calculateRemaining(now, this.config.targetDate);
 
-        if (difference <= 0) {
+        if (remaining.completed) {
             this.countdownEnded();
             return;
         }
@@ -82,32 +81,26 @@ class Countdown {
         this.isCompleted = false;
         this.elements.message.textContent = this.config.message;
 
-        // 计算时间
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
         // 更新显示
-        this.elements.days.textContent = this.formatTime(days);
-        this.elements.hours.textContent = this.formatTime(hours);
-        this.elements.minutes.textContent = this.formatTime(minutes);
-        this.elements.seconds.textContent = this.formatTime(seconds);
+        this.elements.days.textContent = this.formatTime(remaining.days);
+        this.elements.hours.textContent = this.formatTime(remaining.hours);
+        this.elements.minutes.textContent = this.formatTime(remaining.minutes);
+        this.elements.seconds.textContent = this.formatTime(remaining.seconds);
 
         // 更新进度条
-        this.updateProgress(now, target);
+        this.updateProgress(now);
     }
 
     formatTime(time) {
         return time.toString().padStart(2, '0');
     }
 
-    updateProgress(current, target) {
-        const start = new Date(this.config.yearProgress.startDate).getTime();
-        const end = new Date(this.config.yearProgress.endDate).getTime();
-        const total = end - start;
-        const elapsed = current - start;
-        const percent = Math.min(100, Math.max(0, (elapsed / total) * 100));
+    updateProgress(current) {
+        const percent = CountdownTime.calculateProgress(
+            current,
+            this.config.yearProgress.startDate,
+            this.config.yearProgress.endDate
+        );
 
         this.elements.progressFill.style.width = `${percent}%`;
         this.elements.progressPercent.textContent = `${percent.toFixed(2)}%`;
